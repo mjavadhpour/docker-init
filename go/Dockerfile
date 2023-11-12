@@ -6,7 +6,7 @@
 
 ################################################################################
 # Create a stage for building the application.
-ARG GO_VERSION=1.21
+ARG GO_VERSION=latest
 FROM golang:${GO_VERSION} AS build
 WORKDIR /src
 
@@ -50,7 +50,7 @@ RUN --mount=type=cache,target=/var/cache/apk \
         update-ca-certificates
 
 # Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
+# See https://docs.docker.com/go/dockerfile-user-best-practices/
 ARG UID=10001
 RUN adduser \
     --disabled-password \
