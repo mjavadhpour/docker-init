@@ -2,7 +2,7 @@
 
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/engine/reference/builder/
+# https://docs.docker.com/go/dockerfile-reference/
 
 ARG PYTHON_VERSION=latest
 FROM python:${PYTHON_VERSION}-slim as base
@@ -43,7 +43,7 @@ USER appuser
 COPY . .
 
 # Expose the port that the application listens on.
-EXPOSE 8080
+EXPOSE 8070
 
 # Run the application.
-CMD gunicorn 'myapp.example:app' --bind=0.0.0.0:8080
+CMD gunicorn 'myapp.example:app' --bind=0.0.0.0:8070

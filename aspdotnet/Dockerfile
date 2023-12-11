@@ -2,7 +2,7 @@
 
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/engine/reference/builder/
+# https://docs.docker.com/go/dockerfile-reference/
 
 ################################################################################
 
@@ -11,11 +11,14 @@
 
 # Create a stage for building the application.
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8-alpine AS build
-ARG TARGETARCH
 
 COPY . /source
 
 WORKDIR /source
+
+# This is the architecture you’re building for, which is passed in by the builder.
+# Placing it here allows the previous steps to be cached across architectures.
+ARG TARGETARCH
 
 # Build the application.
 # Leverage a cache mount to /root/.nuget/packages so that subsequent builds don't have to re-download packages.
